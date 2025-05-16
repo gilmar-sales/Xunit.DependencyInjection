@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <ParallelizationMode>Enhance</ParallelizationMode>
+    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">net472;$(TargetFrameworks)</TargetFrameworks>
+  </PropertyGroup>
+
+  <Import Project="..\..\src\Xunit.DependencyInjection\Xunit.DependencyInjection.targets" />
+  <Import Project="..\TestPackages.targets" />
+
+  <ItemGroup>
+    <AssemblyAttribute Include="Xunit.CollectionBehavior">
+      <_Parameter1>MaxParallelThreads = 12</_Parameter1>
+      <_Parameter1_IsLiteral>true</_Parameter1_IsLiteral>
+    </AssemblyAttribute>
+
+    <Compile Include="../Xunit.DependencyInjection.Test.DisableTestParallelization/*.cs" />
+
+    <PackageReference Include="Shouldly" Version="4.*" />
+
+    <ProjectReference Include="..\..\src\Xunit.DependencyInjection\Xunit.DependencyInjection.csproj" />
+  </ItemGroup>
+
+</Project>
